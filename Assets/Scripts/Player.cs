@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         GetComponent<SpriteAnimation>().SetSprite(center, 0.2f);
-        bullet.speed = 2f;
+        bullet.speed = 5f;
     }
 
 
@@ -42,6 +42,19 @@ public class Player : MonoBehaviour
         Shoot();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<EnemyBulletA>())
+        {
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.GetComponent<EnemyA>())
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
     void Shoot()
     {
         fireTimer += Time.deltaTime;
@@ -50,7 +63,11 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 PlayerBullet b = Instantiate(bullet, parent);
+                b.name = "pBullet";
                 b.transform.SetParent(bulletParent);
+
+                Destroy(b.gameObject, 2f);
+
                 fireTimer = 0;
             }
         }
