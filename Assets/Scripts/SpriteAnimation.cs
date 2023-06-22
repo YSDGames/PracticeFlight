@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteAnimation : MonoBehaviour
 {
     private List<Sprite> sprites = new List<Sprite>();
+    private List<Sprite> sprites1 = new List<Sprite>();
+
+    private List<Sprite> hitSprites = new List<Sprite>();
+
     private SpriteRenderer sr;
 
     private float spriteDelayTime;
+    private float sprtieDelayTime1;
     private float delayTime = 0f;
 
     private int spriteAnimationIndex = 0;
+
+    private UnityAction action;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,13 +35,38 @@ public class SpriteAnimation : MonoBehaviour
         if (delayTime > spriteDelayTime)
         {
             delayTime = 0;
-            sr.sprite = sprites[spriteAnimationIndex];
-            spriteAnimationIndex++;
-
-            if (spriteAnimationIndex > sprites.Count - 1)
+            if (sprites1.Count != 0)
             {
-                spriteAnimationIndex = 0;
+                sr.sprite = sprites1[spriteAnimationIndex];
+                spriteAnimationIndex++;
+
+                if (spriteAnimationIndex > sprites1.Count - 1)
+                {
+                    spriteAnimationIndex = 0;
+                    sprites1.Clear();
+                }
+
             }
+            else
+            {
+                sr.sprite = sprites[spriteAnimationIndex];
+                spriteAnimationIndex++;
+
+                if (spriteAnimationIndex > sprites.Count - 1)
+                {
+                    if (action != null)
+                    {
+                        sprites.Clear();
+                        action();
+                    }
+                    else
+                    {
+                        spriteAnimationIndex = 0;
+
+                    }
+                }
+            }
+            
         }
     }
 
@@ -42,6 +75,25 @@ public class SpriteAnimation : MonoBehaviour
         this.delayTime = float.MaxValue;
         spriteAnimationIndex = 0;
         sprites = argSprites;
+        spriteDelayTime = delayTime;
+    }
+
+    public void SetSprite(List<Sprite> argSprites, float delayTime, UnityAction action)
+    {
+        this.delayTime = float.MaxValue;
+        spriteAnimationIndex = 0;
+        sprites = argSprites;
+        spriteDelayTime = delayTime;
+        this.action = action;
+    }
+
+    public void SetSprite(List<Sprite> argSprites, List<Sprite> argSprites1, float delayTime , float delayTime1)
+    {
+        this.delayTime = float.MaxValue;
+        spriteAnimationIndex = 0;
+        sprites = argSprites;
+        sprites1 = argSprites1;
+        sprtieDelayTime1 = delayTime1;
         spriteDelayTime = delayTime;
     }
 }

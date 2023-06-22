@@ -13,9 +13,9 @@ public class EnemyCont : MonoBehaviour
 
     private void Start()
     {
-        Invoke("RandomPosition", 1f);
+        InvokeRepeating("RandomPosition", 1f , 1f);
 
-        //InvokeRepeating("RandomPosition", 1f, 1f);
+        
 
 
     }
@@ -27,7 +27,7 @@ public class EnemyCont : MonoBehaviour
 
     void RandomPosition()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = spawnBox.transform.position;
 
         float sizeX = spawnBox.bounds.size.x;
         float sizeY = spawnBox.bounds.size.y;

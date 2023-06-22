@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    [HideInInspector] public float speed; 
-   
+    [HideInInspector] public float speed;
+    [HideInInspector] public float power = 1;
+
+
 
     void Update()
     {

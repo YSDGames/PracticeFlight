@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
         if (collision.GetComponent<EnemyA>())
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyA>().Hit(1);
         }
     }
 
