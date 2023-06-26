@@ -7,8 +7,8 @@ public class EnemyA : Enemy
     public override void Init()
     {
         data.speed = 3;
-        data.hp = 10;
-
+        data.hp = 3;
+        fireDelayTime = 1;
 
         base.Init();
     }
@@ -21,14 +21,6 @@ public class EnemyA : Enemy
         
 
     }
-
-    public override void test()
-    {
-        Debug.Log("000-0");
-    }
-
-    
-
-
+       
 
 }

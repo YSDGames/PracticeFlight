@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyB
+public class EnemyB:Enemy
 {
-    
-    void Start()
-    {
-        
 
-        
+    public override void Init()
+    {
+        data.speed = 3;
+        data.hp = 3;
+
+
+        base.Init();
     }
 
-    
+    void Start()
+    {
+
+
+        Init();
+
+
+    }
+
 }

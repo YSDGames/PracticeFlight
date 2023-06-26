@@ -9,13 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField] List<Sprite> left;
     [SerializeField] PlayerBullet bullet;
     [SerializeField] Transform parent;
-    [SerializeField] Transform bulletParent;
+    [SerializeField] public Transform bulletParent;
 
 
     public float fireDelayTime;
     public float fireTimer;
 
 
+    public static Player instance;
 
     enum Direction
     {
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+
         GetComponent<SpriteAnimation>().SetSprite(center, 0.2f);
         bullet.speed = 5f;
     }
@@ -47,11 +50,6 @@ public class Player : MonoBehaviour
         if (collision.GetComponent<EnemyBulletA>())
         {
             Destroy(collision.gameObject);
-        }
-
-        if (collision.GetComponent<EnemyA>())
-        {
-            collision.gameObject.GetComponent<EnemyA>().Hit(1);
         }
     }
 

@@ -8,7 +8,6 @@ public class SpriteAnimation : MonoBehaviour
     private List<Sprite> sprites = new List<Sprite>();
     private List<Sprite> sprites1 = new List<Sprite>();
 
-    private List<Sprite> hitSprites = new List<Sprite>();
 
     private SpriteRenderer sr;
 

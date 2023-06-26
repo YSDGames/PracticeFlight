@@ -8,14 +8,17 @@ public class EnemyCont : MonoBehaviour
     [SerializeField] Transform parent;
 
     [SerializeField] BoxCollider2D spawnBox;
+    public Transform enemyBullet;
 
+    public static EnemyCont instance;
     float timer;
 
+    
     private void Start()
     {
         InvokeRepeating("RandomPosition", 1f , 1f);
 
-        
+        instance= this;
 
 
     }
@@ -38,6 +41,7 @@ public class EnemyCont : MonoBehaviour
         Vector3 randomPos = new Vector3(sizeX, sizeY, 0f);
 
         Vector3 randPos = pos + randomPos;
-        Instantiate(enemy, randPos, Quaternion.identity, parent);
+        Enemy e = Instantiate(enemy, randPos, Quaternion.identity, parent);
+
     }
 }

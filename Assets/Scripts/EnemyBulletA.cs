@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemyBulletA : MonoBehaviour
 {
     [HideInInspector] public float speed=3f;
-
+    Enemy enemy;
     private void Awake()
     {
+
     }
 
     void Update()
     {
         transform.Translate(Vector3.up * Time.deltaTime * speed);
+        
+
     }
 }
