@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class SpriteAnimation : MonoBehaviour
 {
+    public static SpriteAnimation instance; 
+
     private List<Sprite> sprites = new List<Sprite>();
     private List<Sprite> sprites1 = new List<Sprite>();
 
@@ -21,6 +23,7 @@ public class SpriteAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -61,7 +64,6 @@ public class SpriteAnimation : MonoBehaviour
                     else
                     {
                         spriteAnimationIndex = 0;
-
                     }
                 }
             }
@@ -91,7 +93,7 @@ public class SpriteAnimation : MonoBehaviour
         this.delayTime = float.MaxValue;
         spriteAnimationIndex = 0;
         sprites = argSprites;
-        sprites1 = argSprites1;
+        sprites1 = argSprites1.GetRange(0, argSprites1.Count);
         sprtieDelayTime1 = delayTime1;
         spriteDelayTime = delayTime;
     }
