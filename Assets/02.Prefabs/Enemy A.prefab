@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305447376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8530692952326729601}
   - component: {fileID: 8530692952326729614}
   - component: {fileID: 8530692952326729615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,4 +195,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0

@@ -15,9 +15,9 @@ public struct EnemyData
 
 public abstract class Enemy : MonoBehaviour
 {
-    Item[] items;
+    
     protected EnemyData data = new EnemyData();
-
+    List<Item> items = new List<Item>();
     [SerializeField] protected List<Sprite> normalSP;
     [SerializeField] protected List<Sprite> hitSP;
     [SerializeField] protected List<Sprite> explosionSP;
@@ -42,7 +42,12 @@ public abstract class Enemy : MonoBehaviour
         sa = GetComponent<SpriteAnimation>();
         shootposition = transform.GetChild(0);
 
-        items = Resources.LoadAll<Item>("Item");
+        Item[] itemss = Resources.LoadAll<Item>("Item");
+
+        foreach (var item in itemss)
+        {
+            this.items.Add(item);
+        }
 
     }
 
@@ -96,14 +101,6 @@ public abstract class Enemy : MonoBehaviour
     public void DestoryBullet()
     {
 
-        //if (bulletss.Count > 0)
-        //{
-        //    foreach (var item in bulletss)
-        //    {
-        //        Debug.Log("zz");
-        //        Destroy(item.gameObject);
-        //    }
-        //}
         if (bulletss != null)
             for (int i = bulletss.Count - 1; i >= 0; i--)
             {
@@ -111,7 +108,6 @@ public abstract class Enemy : MonoBehaviour
                 {
                     Destroy(bulletss[i].gameObject);
                 }
-                //bulletss.RemoveAt(i);
                 break;
             }
 
@@ -123,25 +119,14 @@ public abstract class Enemy : MonoBehaviour
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
 
-
         sa.SetSprite(explosionSP, 0.1f,
             () =>
             {
-                int rand = Random.Range(1, 101);
 
-                string spawnStr = rand < 60 ? "Coin" : rand < 80 ? "Power" : "Boom";
-
-                //아이템생성
-                for (int i = 0; i < items.Length; i++)
-                {
-                    if (items[i].name == spawnStr)
-                    {
-                        Instantiate(items[i], transform.position, Quaternion.identity);
-                        break;
-                    }
-                }
+                ItemDrop();
 
                 //파괴
+                DestoryBullet();
                 Destroy(gameObject);
             }
             );
@@ -149,8 +134,6 @@ public abstract class Enemy : MonoBehaviour
 
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
-
-        sa.SetSprite(explosionSP, 0.1f, () => Destroy(gameObject));
     }
     void Shoot()
     {
@@ -168,4 +151,21 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+
+    void ItemDrop()
+    {
+        int rand = Random.Range(1, 101);
+
+        string spawnStr = rand < 60 ? "Coin" : rand < 80 ? "Power" : "Boom";
+
+        //아이템생성
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].name == spawnStr)
+            {
+                Instantiate(items[i], transform.position, Quaternion.identity);
+                break;
+            }
+        }
+    }
 }

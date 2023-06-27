@@ -6,8 +6,8 @@ public class Boom : Item
 {
     void Start()
     {
-        base.Init();
         speed = 1f;
+        base.Init();
 
 
     }

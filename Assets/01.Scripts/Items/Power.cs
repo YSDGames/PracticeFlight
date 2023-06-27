@@ -8,7 +8,5 @@ public class Power : Item
     {
         base.Init();
         speed = 1f;
-
-        
     }
 }

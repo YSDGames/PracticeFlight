@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class SpriteAnimation : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class SpriteAnimation : MonoBehaviour
                     {
                         sprites.Clear();
                         action();
+                        action = null;
                     }
                     else
                     {
@@ -75,7 +77,7 @@ public class SpriteAnimation : MonoBehaviour
     {
         this.delayTime = float.MaxValue;
         spriteAnimationIndex = 0;
-        sprites = argSprites;
+        sprites = argSprites.ToList<Sprite>();
         spriteDelayTime = delayTime;
     }
 
@@ -83,7 +85,7 @@ public class SpriteAnimation : MonoBehaviour
     {
         this.delayTime = float.MaxValue;
         spriteAnimationIndex = 0;
-        sprites = argSprites;
+        sprites = argSprites.ToList<Sprite>();
         spriteDelayTime = delayTime;
         this.action = action;
     }
@@ -92,7 +94,7 @@ public class SpriteAnimation : MonoBehaviour
     {
         this.delayTime = float.MaxValue;
         spriteAnimationIndex = 0;
-        sprites = argSprites;
+        sprites = argSprites.ToList<Sprite>();
         sprites1 = argSprites1.GetRange(0, argSprites1.Count);
         sprtieDelayTime1 = delayTime1;
         spriteDelayTime = delayTime;

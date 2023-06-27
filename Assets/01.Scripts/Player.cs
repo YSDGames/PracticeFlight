@@ -47,10 +47,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<EnemyBulletA>())
+        if (collision.GetComponent<EnemyBulletA>() || collision.GetComponent<Enemy>())
         {
             Destroy(collision.gameObject);
         }
+
+       
     }
 
     void Shoot()

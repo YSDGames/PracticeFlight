@@ -16,4 +16,12 @@ public abstract class Item : MonoBehaviour
     {
         GetComponent<SpriteAnimation>().SetSprite(sprites, 0.1f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Destroy(gameObject); 
+        }
+    }
 }

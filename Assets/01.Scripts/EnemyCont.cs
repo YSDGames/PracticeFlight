@@ -16,11 +16,12 @@ public class EnemyCont : MonoBehaviour
     
     private void Start()
     {
-        InvokeRepeating("RandomPosition", 1f , 1f);
+        //InvokeRepeating("RandomPosition", 1f , 1f);
+        //StartCoroutine(SpawnEnemy());
+        StartCoroutine("SpawnEnemy");
 
-        instance= this;
 
-
+        instance = this;
     }
 
     void Update()
@@ -44,4 +45,18 @@ public class EnemyCont : MonoBehaviour
         Enemy e = Instantiate(enemy, randPos, Quaternion.identity, parent);
 
     }
+
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(1f);
+        RandomPosition();
+        yield return StartCoroutine("Stest");
+        RandomPosition();
+
+    }
+    IEnumerator Stest()
+    {
+        yield return new WaitForSeconds(2f);
+    }
+
 }

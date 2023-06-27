@@ -6,9 +6,7 @@ public class Coin : Item
 {
     void Start()
     {
-        base.Init();
         speed = 1f;
-
-
+        base.Init();
     }
 }
