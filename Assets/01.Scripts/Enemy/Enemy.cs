@@ -110,7 +110,6 @@ public abstract class Enemy : MonoBehaviour
                 if (bulletss[i] != null)
                 {
                     Destroy(bulletss[i].gameObject);
-                    
                 }
                 //bulletss.RemoveAt(i);
                 break;

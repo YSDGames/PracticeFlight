@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    [SerializeField] protected List<Sprite> sprites;
+    [SerializeField] private List<Sprite> sprites;
     protected float speed;
 
     void Update()
