@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
         set
         {
             score = value;
-            txt.text = value.ToString();
+            txt.text = $"Score : {score}";
         }
     }
 
