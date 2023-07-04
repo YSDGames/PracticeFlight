@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] List<Sprite> right;
     [SerializeField] List<Sprite> left;
     [SerializeField] PlayerBullet bullet;
+    [SerializeField] PlayerSkill skill;
     [SerializeField] Transform parent;
     [SerializeField] public Transform bulletParent;
 
@@ -17,7 +18,7 @@ public class Player : MonoBehaviour
 
 
     public static Player instance;
-
+    public float speed;
     enum Direction
     {
         center,
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
 
     Direction dir = Direction.center;
 
-    public float speed;
+    
 
     void Awake()
     {
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        Skill();
         Move();
         Shoot();
     }
@@ -52,7 +54,22 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-       
+
+    }
+
+    void Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && UI.instance.coolTime == 0)
+        {
+            UI.instance.coolTime = UI.instance.maxCoolTime;
+            UI.instance.coolTimeImage.gameObject.SetActive(true);
+
+            PlayerSkill b = Instantiate(skill, parent);
+            b.name = "pSkill";
+            b.transform.SetParent(bulletParent);
+
+            Destroy(b.gameObject, 2f);
+        }
     }
 
     void Shoot()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : MonoBehaviour
+public class PlayerSkill : MonoBehaviour
 {
     public float speed;
     public float power = 1;
@@ -14,5 +14,5 @@ public class PlayerBullet : MonoBehaviour
         transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 
-    
+
 }

@@ -13,6 +13,10 @@ public class UI : MonoBehaviour
     [SerializeField] private Image mpImage;
     [SerializeField] private TMP_Text mpText;
 
+    [SerializeField] public Image coolTimeImage;
+    [SerializeField] private TMP_Text coolTimeText;
+
+
 
 
     float curHp = 100f;
@@ -20,7 +24,8 @@ public class UI : MonoBehaviour
     float curMp = 100f;
     float maxMp = 100f;
 
-
+    public float maxCoolTime;
+    public float coolTime;
 
     public static UI instance;
     int score;
@@ -43,9 +48,18 @@ public class UI : MonoBehaviour
         instance = this;
         txt.fontSize = 70;
         txt.alignment = TextAlignmentOptions.Left | TextAlignmentOptions.Center;
+
+        maxCoolTime = 6;
+        coolTime =0 ;
     }
 
     private void Update()
+    {
+        HpControl();
+        CoolTimeControl();
+    }
+
+    private void HpControl()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -69,5 +83,20 @@ public class UI : MonoBehaviour
 
         hpText.text = $"{curHp}/{maxHp}";
         mpText.text = $"{curMp}/{maxMp}";
+    }
+
+    private void CoolTimeControl()
+    {
+        coolTime -= Time.deltaTime;
+
+        if (coolTime <= 0)
+        {
+            coolTimeImage.gameObject.SetActive(false);
+            coolTime = 0;
+        }
+        else if (coolTime < 1) coolTimeText.text = $"{coolTime:N1}";
+        else coolTimeText.text = $"{(int)coolTime}";
+
+        coolTimeImage.fillAmount = coolTime / maxCoolTime;
     }
 }

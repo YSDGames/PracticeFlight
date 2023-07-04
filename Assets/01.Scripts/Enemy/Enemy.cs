@@ -15,7 +15,7 @@ public struct EnemyData
 
 public abstract class Enemy : MonoBehaviour
 {
-    
+
     protected EnemyData data = new EnemyData();
     List<Item> items = new List<Item>();
     [SerializeField] protected List<Sprite> normalSP;
@@ -82,7 +82,12 @@ public abstract class Enemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Hit(collision.GetComponent<PlayerBullet>().power);
+        }
 
+        if (collision.GetComponent<PlayerSkill>())
+        {
+
+            Hit(collision.GetComponent<PlayerSkill>().power);
         }
     }
 

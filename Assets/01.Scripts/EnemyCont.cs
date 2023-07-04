@@ -48,15 +48,11 @@ public class EnemyCont : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(1f);
-        RandomPosition();
-        yield return StartCoroutine("Stest");
-        RandomPosition();
-
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            RandomPosition();
+        }
     }
-    IEnumerator Stest()
-    {
-        yield return new WaitForSeconds(2f);
-    }
-
+    
 }
