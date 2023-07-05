@@ -25,10 +25,7 @@ public class Player : MonoBehaviour
         left,
         right
     }
-
     Direction dir = Direction.center;
-
-    
 
     void Awake()
     {
@@ -37,8 +34,6 @@ public class Player : MonoBehaviour
         GetComponent<SpriteAnimation>().SetSprite(center, 0.2f);
         bullet.speed = 5f;
     }
-
-
 
     void Update()
     {
@@ -53,8 +48,6 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-
-
     }
 
     void Skill()
@@ -89,7 +82,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     void Move()
     {
         float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;

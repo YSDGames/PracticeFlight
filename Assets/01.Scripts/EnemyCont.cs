@@ -11,9 +11,6 @@ public class EnemyCont : MonoBehaviour
     public Transform enemyBullet;
 
     public static EnemyCont instance;
-    float timer;
-
-    
     private void Start()
     {
         //InvokeRepeating("RandomPosition", 1f , 1f);
@@ -51,6 +48,7 @@ public class EnemyCont : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            
             RandomPosition();
         }
     }

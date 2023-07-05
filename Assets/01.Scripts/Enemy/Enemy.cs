@@ -105,7 +105,6 @@ public abstract class Enemy : MonoBehaviour
 
     public void DestoryBullet()
     {
-
         if (bulletss != null)
             for (int i = bulletss.Count - 1; i >= 0; i--)
             {
@@ -115,7 +114,6 @@ public abstract class Enemy : MonoBehaviour
                 }
                 break;
             }
-
     }
 
     public void Dead()
@@ -124,22 +122,17 @@ public abstract class Enemy : MonoBehaviour
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
 
-
         UI.instance.SetScore += 10;
 
         sa.SetSprite(explosionSP, 0.1f,
             () =>
             {
-
                 ItemDrop();
-
                 //ÆÄ±«
                 DestoryBullet();
                 Destroy(gameObject);
             }
             );
-
-
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
     }
