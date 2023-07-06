@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     [SerializeField] public Image coolTimeImage;
     [SerializeField] private TMP_Text coolTimeText;
 
+
     float curHp = 100f;
     float maxHp = 100f;
     float curMp = 100f;
@@ -98,5 +99,7 @@ public class UI : MonoBehaviour
 
         coolTimeImage.fillAmount = coolTime / maxCoolTime;
     }
+    
+    
     
 }

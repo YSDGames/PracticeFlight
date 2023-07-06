@@ -86,8 +86,11 @@ public abstract class Enemy : MonoBehaviour
 
         if (collision.GetComponent<PlayerSkill>())
         {
-
             Hit(collision.GetComponent<PlayerSkill>().power);
+        }
+        if (collision.GetComponent<SpecialBullet>())
+        {
+            Dead();
         }
     }
 
@@ -114,6 +117,7 @@ public abstract class Enemy : MonoBehaviour
                 }
                 break;
             }
+
     }
 
     public void Dead()
@@ -133,8 +137,6 @@ public abstract class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
             );
-        Destroy(GetComponent<Rigidbody2D>());
-        GetComponent<CircleCollider2D>().enabled = false;
     }
     void Shoot()
     {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerSkill skill;
     [SerializeField] Transform parent;
     [SerializeField] public Transform bulletParent;
+    [SerializeField] private SpecialBullet specialBullet;
 
+    public Button button;
 
     public float fireDelayTime;
     public float fireTimer;
@@ -33,6 +37,8 @@ public class Player : MonoBehaviour
 
         GetComponent<SpriteAnimation>().SetSprite(center, 0.2f);
         bullet.speed = 5f;
+
+        
     }
 
     void Update()
@@ -50,6 +56,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnSpecialFire()
+    {
+        if(UI.instance.coolTime == 0)
+        {
+            UI.instance.coolTime = UI.instance.maxCoolTime;
+            UI.instance.coolTimeImage.gameObject.SetActive(true);
+
+            specialBullet.OnShow();
+            //PlayerSkill b = Instantiate(skill, parent);
+            //b.name = "pSkill";
+            //b.transform.SetParent(bulletParent);
+
+            //Destroy(b.gameObject, 2f);
+        }
+        
+    }
+
     void Skill()
     {
         if (Input.GetKeyDown(KeyCode.X) && UI.instance.coolTime == 0)
@@ -57,11 +80,13 @@ public class Player : MonoBehaviour
             UI.instance.coolTime = UI.instance.maxCoolTime;
             UI.instance.coolTimeImage.gameObject.SetActive(true);
 
-            PlayerSkill b = Instantiate(skill, parent);
-            b.name = "pSkill";
-            b.transform.SetParent(bulletParent);
+            specialBullet.OnShow();
 
-            Destroy(b.gameObject, 2f);
+            //PlayerSkill b = Instantiate(skill, parent);
+            //b.name = "pSkill";
+            //b.transform.SetParent(bulletParent);
+
+            //Destroy(b.gameObject, 2f);
         }
     }
 
@@ -110,4 +135,6 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(clampX, clampY, 0);
     }
+
+
 }
