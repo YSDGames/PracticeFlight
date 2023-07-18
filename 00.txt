@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class tiles : MonoBehaviour
+{
+    public GameObject[] istiles;
+    public GameObject[] isFull;
+
+    public static tiles instance;
+    void Start()
+    {
+        instance = this;
+
+        isFull = new GameObject[istiles.Length];
+        int i = 0;
+        foreach (var item in istiles)
+        {
+            isFull[i] = item.transform.GetChild(0).gameObject;
+            i++;
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Move : MonoBehaviour
+{
+    int nowGrid;
+    public int startGrid;
+
+    public GameObject[] tiless;
+    void Start()
+    {
+        nowGrid = startGrid;
+        transform.position = tiles.instance.istiles[nowGrid].transform.position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (tiles.instance.isFull[nowGrid+1].activeSelf)
+        {
+
+            tiles.instance.isFull[nowGrid].SetActive(true);
+
+
+            transform.position = Vector3.MoveTowards(transform.position, tiles.instance.istiles[nowGrid].transform.position, 5 * Time.deltaTime);
+
+            if (transform.position == tiles.instance.istiles[nowGrid].transform.position)
+            {
+                tiles.instance.isFull[nowGrid+1].SetActive(false);
+                nowGrid++;
+            }
+        }
+    }
+}
+
