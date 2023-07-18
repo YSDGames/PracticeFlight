@@ -27,13 +27,6 @@ public class simpleDropDown : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     public void OnvalueChange(int abc)
     {
         this.abc = abc;
