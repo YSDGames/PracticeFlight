@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class InvenItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Image icon;
+    [SerializeField] TMPro.TMP_Text enchanTxt;
+    [SerializeField] GameObject equipTxt;
 
-    // Update is called once per frame
-    void Update()
+    public ItemData data;
+    public void SetData(ItemData data)
     {
-        
+        this.data = data;
+
+        icon.sprite = data.sprite;
+        enchanTxt.text = data.enchan.ToString();
+        equipTxt.SetActive(data.isEquip);
+       
+    }
+    public void SetSprite(Sprite sprite)
+    {
+        icon.sprite = sprite;
     }
 }
