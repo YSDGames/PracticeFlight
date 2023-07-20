@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public enum ItemType
@@ -16,11 +16,14 @@ public class ItemData
     public int enchan;
     public bool isEquip;
     public ItemType type;
+    public int index;
 }
 public class Inventory : MonoBehaviour
 {
     [SerializeField] InvenItem prefab;
     [SerializeField] Transform parent;
+
+    [SerializeField] Transform tempInventory;
 
     [SerializeField] Toggle[] toggles;
     //아이템 데이터========================================================================
@@ -34,6 +37,7 @@ public class Inventory : MonoBehaviour
     List<InvenItem> invenItems = new List<InvenItem>();
     //============================================================================================================
 
+    int createCount = 1;
     private void Start()
     {
         CreateData(weaponS, ItemType.Weapon);
@@ -49,7 +53,8 @@ public class Inventory : MonoBehaviour
             ItemData data = itemDic[key][Random.Range(0, itemDic[key].Count)];
             InvenItem item = Instantiate(prefab, parent);
             item.SetData(data);
-
+            data.index = createCount++;
+            
             invenItems.Add(item);
         }
     }
@@ -71,27 +76,39 @@ public class Inventory : MonoBehaviour
     }
     public void OnTabChange(Toggle toggle)
     {
-        ItemType type = ItemType.Weapon;
+        ItemType type = ItemType.Etc;
 
         for (int i = 0; i < toggles.Length; i++)
         {
             if (toggle == toggles[i] && toggle.isOn)
             {
                 type = (ItemType)i;
-                return;
+                break;
+            }
+        }
+       
+        for (int i = 0; i < invenItems.Count; i++)
+        {
+            invenItems[i].transform.SetParent(tempInventory);
+        }
+        List<InvenItem> items = new List<InvenItem>();
+        for (int i = 0; i < tempInventory.childCount; i++)
+        {
+            InvenItem item = tempInventory.GetChild(i).GetComponent<InvenItem>(); //getchild 꺼져있는거도 접근?
+            if(type == item.data.type)
+            {
+                items.Add(item);
             }
         }
 
-        for (int i = 0; i < invenItems.Count; i++)
+        invenItems.Sort((a, b) => a.data.index.CompareTo(b.data.index));
+        invenItems.Reverse();
+        //items.Sort();
+        foreach (var item in items)
         {
-            if(type == invenItems[i].data.type)
-            {
-                invenItems[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                invenItems[i].gameObject.SetActive(false);
-            }
+            item.transform.SetParent(parent);
         }
     }
+
+
 }
